@@ -40,6 +40,7 @@ namespace Puzzle15
                         Top = row * 84,
                         Left = col * 84,
                         Text = blockCount.ToString(),
+                        Name = "Block" + blockCount.ToString()
                     };
 
                     //block.Click += new EventHandler(Block_Click);
@@ -62,12 +63,40 @@ namespace Puzzle15
         private void Block_Click(object sender,EventArgs e)
         {
             Button block = (Button)sender;
-            MessageBox.Show(block.Name);
+            if(IsAdjacent(block))
+            {
+                SwapBlocks(block);
+            }
+            //MessageBox.Show(block.Name);
+            SwapBlocks(block);
         }
 
         private void SwapBlocks(Button block)
         {
-            Button emptyBock = (Button)this.Controls["EmptyBlock"]; 
+            Button emptyBlock = (Button)this.Controls["EmptyBlock"];
+            Point oldLocation = block.Location;
+            block.Location = emptyBlock.Location;
+            emptyBlock.Location = oldLocation;
+        }
+
+        private bool IsAdjacent(Button block)
+        {
+            double a;
+            double b;
+            double c;
+            Button emptyBlock = (Button)this.Controls["EmptyBlock"];
+
+            a = Math.Abs(emptyBlock.Top - block.Top);
+            b = Math.Abs(emptyBlock.Left - block.Left);
+            c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+            if(c < 85)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 
