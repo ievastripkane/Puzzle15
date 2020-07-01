@@ -67,7 +67,7 @@ namespace Puzzle15
 
         private void SwapBlocks(Button block)
         {
-            Button emptyBock = (Button)this.Controls["EmptyBlock"];
+            Button emptyBock = (Button)this.Controls["EmptyBlock"]; 
         }
 
 
